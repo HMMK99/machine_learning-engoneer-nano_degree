@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diagnosis Assisstant System</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      margin: 15px 0;
+      font-weight: 400;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 3px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px #ccc; 
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      select {
+      width: 100%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 6px);
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item:hover p, .item:hover i {
+      color: #095484;
+      }
+      input:hover, select:hover, textarea:hover, .preferred-metod label:hover input {
+      box-shadow: 0 0 5px 0 #095484;
+      }
+      .preferred-metod label {
+      display: block;
+      margin: 5px 0;
+      }
+      .preferred-metod:hover input {
+      box-shadow: none;
+      }
+      .preferred-metod-item input, .preferred-metod-item span {
+      width: auto;
+      vertical-align: middle;
+      }
+      .preferred-metod-item input {
+      margin: 0 5px 0 0;
+      }
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+      }
+      .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      font-size: 20px;
+      color: #a9a9a9;
+      }
+      .item i {
+      right: 1%;
+      top: 30px;
+      z-index: 1;
+      }
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 0;
+      z-index: 2;
+      opacity: 0;
+      cursor: pointer;
+      }
+      .btn-block {
+      margin-top: 20px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;      
+      -webkit-border-radius: 5px; 
+      -moz-border-radius: 5px; 
+      border-radius: 5px; 
+      background-color: #095484;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background-color: #0666a3;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .city-item input {
+      width: calc(50% - 20px);
+      }
+      .city-item select {
+      width: calc(50% - 8px);
+      }
+      }
+    </style>
+    <script>
+      "use strict";
+      function submitForm(oFormElement) {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = function() {
+              var result = xhr.responseText;
+              var resultElement = document.getElementById('result');
+              resultElement.className = 'bg-danger';
+              resultElement.innerHTML = result;
+          }
+          
+          xhr.open (oFormElement.method, oFormElement.action, true);
+          var form_data = new FormData(document.querySelector("form"));
+          var x = ''
+          for(var pair of form_data.entries()) 
+          {
+              x = x + pair[0] + ','
+          }
+          console.log(x);
+          xhr.send(x);
+          return false;
+      }
+     </script>
+  </head>
+  <body>
+    <div class="testbox">
+      <form method="POST"
+                  action="https://8x97xnw56i.execute-api.us-east-2.amazonaws.com/healthCare"
+                  onsubmit="return submitForm(this);" >  
+      <!-- <form onsubmit="return handleData()"> -->
+        <h1>Diagnosis Assistance System</h1>
+        <h4>Provide the symptoms please</h4>
+        <div class="item">
+        
+        <div class="item preferred-metod">
+          <div for="review" class="preferred-metod-item">
+            <label><input type="checkbox" name=" abdominal_pain"> <span> abdominal pain</span></label>
+            <label><input type="checkbox" name=" abnormal_menstruation"> <span> abnormal menstruation</span></label>
+            <label><input type="checkbox" name=" acidity"> <span> acidity</span></label>
+            <label><input type="checkbox" name=" acute_liver_failure"> <span> acute liver failure</span></label>
+            <label><input type="checkbox" name=" altered_sensorium"> <span> altered sensorium</span></label>
+            <label><input type="checkbox" name=" anxiety"> <span> anxiety</span></label>
+            <label><input type="checkbox" name=" back_pain"> <span> back pain</span></label>
+            <label><input type="checkbox" name=" belly_pain"> <span> belly pain</span></label>
+            <label><input type="checkbox" name=" blackheads"> <span> blackheads</span></label>
+            <label><input type="checkbox" name=" bladder_discomfort"> <span> bladder discomfort</span></label>
+            <label><input type="checkbox" name=" blister"> <span> blister</span></label>
+            <label><input type="checkbox" name=" blood_in_sputum"> <span> blood in sputum</span></label>
+            <label><input type="checkbox" name=" bloody_stool"> <span> bloody stool</span></label>
+            <label><input type="checkbox" name=" blurred_and_distorted_vision"> <span> blurred and distorted vision</span></label>
+            <label><input type="checkbox" name=" breathlessness"> <span> breathlessness</span></label>
+            <label><input type="checkbox" name=" brittle_nails"> <span> brittle nails</span></label>
+            <label><input type="checkbox" name=" bruising"> <span> bruising</span></label>
+            <label><input type="checkbox" name=" burning_micturition"> <span> burning micturition</span></label>
+            <label><input type="checkbox" name=" chest_pain"> <span> chest pain</span></label>
+            <label><input type="checkbox" name=" chills"> <span> chills</span></label>
+            <label><input type="checkbox" name=" cold_hands_and_feets"> <span> cold hands and feets</span></label>
+            <label><input type="checkbox" name=" coma"> <span> coma</span></label>
+            <label><input type="checkbox" name=" congestion"> <span> congestion</span></label>
+            <label><input type="checkbox" name=" constipation"> <span> constipation</span></label>
+            <label><input type="checkbox" name=" continuous_feel_of_urine"> <span> continuous feel of urine</span></label>
+            <label><input type="checkbox" name=" continuous_sneezing"> <span> continuous sneezing</span></label>
+            <label><input type="checkbox" name=" cough"> <span> cough</span></label>
+            <label><input type="checkbox" name=" cramps"> <span> cramps</span></label>
+            <label><input type="checkbox" name=" dark_urine"> <span> dark urine</span></label>
+            <label><input type="checkbox" name=" dehydration"> <span> dehydration</span></label>
+            <label><input type="checkbox" name=" depression"> <span> depression</span></label>
+            <label><input type="checkbox" name=" diarrhoea"> <span> diarrhoea</span></label>
+            <label><input type="checkbox" name=" dischromic _patches"> <span> dischromic  patches</span></label>
+            <label><input type="checkbox" name=" distention_of_abdomen"> <span> distention of abdomen</span></label>
+            <label><input type="checkbox" name=" dizziness"> <span> dizziness</span></label>
+            <label><input type="checkbox" name=" drying_and_tingling_lips"> <span> drying and tingling lips</span></label>
+            <label><input type="checkbox" name=" enlarged_thyroid"> <span> enlarged thyroid</span></label>
+            <label><input type="checkbox" name=" excessive_hunger"> <span> excessive hunger</span></label>
+            <label><input type="checkbox" name=" extra_marital_contacts"> <span> extra marital contacts</span></label>
+            <label><input type="checkbox" name=" family_history"> <span> family history</span></label>
+            <label><input type="checkbox" name=" fast_heart_rate"> <span> fast heart rate</span></label>
+            <label><input type="checkbox" name=" fatigue"> <span> fatigue</span></label>
+            <label><input type="checkbox" name=" fluid_overload"> <span> fluid overload</span></label>
+            <label><input type="checkbox" name=" foul_smell_of urine"> <span> foul smell of urine</span></label>
+            <label><input type="checkbox" name=" headache"> <span> headache</span></label>
+            <label><input type="checkbox" name=" high_fever"> <span> high fever</span></label>
+            <label><input type="checkbox" name=" hip_joint_pain"> <span> hip joint pain</span></label>
+            <label><input type="checkbox" name=" history_of_alcohol_consumption"> <span> history of alcohol consumption</span></label>
+            <label><input type="checkbox" name=" increased_appetite"> <span> increased appetite</span></label>
+            <label><input type="checkbox" name=" indigestion"> <span> indigestion</span></label>
+            <label><input type="checkbox" name=" inflammatory_nails"> <span> inflammatory nails</span></label>
+            <label><input type="checkbox" name=" internal_itching"> <span> internal itching</span></label>
+            <label><input type="checkbox" name=" irregular_sugar_level"> <span> irregular sugar level</span></label>
+            <label><input type="checkbox" name=" irritability"> <span> irritability</span></label>
+            <label><input type="checkbox" name=" irritation_in_anus"> <span> irritation in anus</span></label>
+            <label><input type="checkbox" name=" joint_pain"> <span> joint pain</span></label>
+            <label><input type="checkbox" name=" knee_pain"> <span> knee pain</span></label>
+            <label><input type="checkbox" name=" lack_of_concentration"> <span> lack of concentration</span></label>
+            <label><input type="checkbox" name=" lethargy"> <span> lethargy</span></label>
+            <label><input type="checkbox" name=" loss_of_appetite"> <span> loss of appetite</span></label>
+            <label><input type="checkbox" name=" loss_of_balance"> <span> loss of balance</span></label>
+            <label><input type="checkbox" name=" loss_of_smell"> <span> loss of smell</span></label>
+            <label><input type="checkbox" name=" malaise"> <span> malaise</span></label>
+            <label><input type="checkbox" name=" mild_fever"> <span> mild fever</span></label>
+            <label><input type="checkbox" name=" mood_swings"> <span> mood swings</span></label>
+            <label><input type="checkbox" name=" movement_stiffness"> <span> movement stiffness</span></label>
+            <label><input type="checkbox" name=" mucoid_sputum"> <span> mucoid sputum</span></label>
+            <label><input type="checkbox" name=" muscle_pain"> <span> muscle pain</span></label>
+            <label><input type="checkbox" name=" muscle_wasting"> <span> muscle wasting</span></label>
+            <label><input type="checkbox" name=" muscle_weakness"> <span> muscle weakness</span></label>
+            <label><input type="checkbox" name=" nausea"> <span> nausea</span></label>
+            <label><input type="checkbox" name=" neck_pain"> <span> neck pain</span></label>
+            <label><input type="checkbox" name=" nodal_skin_eruptions"> <span> nodal skin eruptions</span></label>
+            <label><input type="checkbox" name=" obesity"> <span> obesity</span></label>
+            <label><input type="checkbox" name=" pain_behind_the_eyes"> <span> pain behind the eyes</span></label>
+            <label><input type="checkbox" name=" pain_during_bowel_movements"> <span> pain during bowel movements</span></label>
+            <label><input type="checkbox" name=" pain_in_anal_region"> <span> pain in anal region</span></label>
+            <label><input type="checkbox" name=" painful_walking"> <span> painful walking</span></label>
+            <label><input type="checkbox" name=" palpitations"> <span> palpitations</span></label>
+            <label><input type="checkbox" name=" passage_of_gases"> <span> passage of gases</span></label>
+            <label><input type="checkbox" name=" patches_in_throat"> <span> patches in throat</span></label>
+            <label><input type="checkbox" name=" phlegm"> <span> phlegm</span></label>
+            <label><input type="checkbox" name=" polyuria"> <span> polyuria</span></label>
+            <label><input type="checkbox" name=" prominent_veins_on_calf"> <span> prominent veins on calf</span></label>
+            <label><input type="checkbox" name=" puffy_face_and_eyes"> <span> puffy face and eyes</span></label>
+            <label><input type="checkbox" name=" pus_filled_pimples"> <span> pus filled pimples</span></label>
+            <label><input type="checkbox" name=" receiving_blood_transfusion"> <span> receiving blood transfusion</span></label>
+            <label><input type="checkbox" name=" receiving_unsterile_injections"> <span> receiving unsterile injections</span></label>
+            <label><input type="checkbox" name=" red_sore_around_nose"> <span> red sore around nose</span></label>
+            <label><input type="checkbox" name=" red_spots_over_body"> <span> red spots over body</span></label>
+            <label><input type="checkbox" name=" redness_of_eyes"> <span> redness of eyes</span></label>
+            <label><input type="checkbox" name=" restlessness"> <span> restlessness</span></label>
+            <label><input type="checkbox" name=" runny_nose"> <span> runny nose</span></label>
+            <label><input type="checkbox" name=" rusty_sputum"> <span> rusty sputum</span></label>
+            <label><input type="checkbox" name=" scurring"> <span> scurring</span></label>
+            <label><input type="checkbox" name=" shivering"> <span> shivering</span></label>
+            <label><input type="checkbox" name=" silver_like_dusting"> <span> silver like dusting</span></label>
+            <label><input type="checkbox" name=" sinus_pressure"> <span> sinus pressure</span></label>
+            <label><input type="checkbox" name=" skin_peeling"> <span> skin peeling</span></label>
+            <label><input type="checkbox" name=" skin_rash"> <span> skin rash</span></label>
+            <label><input type="checkbox" name=" slurred_speech"> <span> slurred speech</span></label>
+            <label><input type="checkbox" name=" small_dents_in_nails"> <span> small dents in nails</span></label>
+            <label><input type="checkbox" name=" spinning_movements"> <span> spinning movements</span></label>
+            <label><input type="checkbox" name=" spotting_ urination"> <span> spotting  urination</span></label>
+            <label><input type="checkbox" name=" stiff_neck"> <span> stiff neck</span></label>
+            <label><input type="checkbox" name=" stomach_bleeding"> <span> stomach bleeding</span></label>
+            <label><input type="checkbox" name=" stomach_pain"> <span> stomach pain</span></label>
+            <label><input type="checkbox" name=" sunken_eyes"> <span> sunken eyes</span></label>
+            <label><input type="checkbox" name=" sweating"> <span> sweating</span></label>
+            <label><input type="checkbox" name=" swelled_lymph_nodes"> <span> swelled lymph nodes</span></label>
+            <label><input type="checkbox" name=" swelling_joints"> <span> swelling joints</span></label>
+            <label><input type="checkbox" name=" swelling_of_stomach"> <span> swelling of stomach</span></label>
+            <label><input type="checkbox" name=" swollen_blood_vessels"> <span> swollen blood vessels</span></label>
+            <label><input type="checkbox" name=" swollen_extremeties"> <span> swollen extremeties</span></label>
+            <label><input type="checkbox" name=" swollen_legs"> <span> swollen legs</span></label>
+            <label><input type="checkbox" name=" throat_irritation"> <span> throat irritation</span></label>
+            <label><input type="checkbox" name=" toxic_look_(typhos)"> <span> toxic look (typhos)</span></label>
+            <label><input type="checkbox" name=" ulcers_on_tongue"> <span> ulcers on tongue</span></label>
+            <label><input type="checkbox" name=" unsteadiness"> <span> unsteadiness</span></label>
+            <label><input type="checkbox" name=" visual_disturbances"> <span> visual disturbances</span></label>
+            <label><input type="checkbox" name=" vomiting"> <span> vomiting</span></label>
+            <label><input type="checkbox" name=" watering_from_eyes"> <span> watering from eyes</span></label>
+            <label><input type="checkbox" name=" weakness_in_limbs"> <span> weakness in limbs</span></label>
+            <label><input type="checkbox" name=" weakness_of_one_body_side"> <span> weakness of one body side</span></label>
+            <label><input type="checkbox" name=" weight_gain"> <span> weight gain</span></label>
+            <label><input type="checkbox" name=" weight_loss"> <span> weight loss</span></label>
+            <label><input type="checkbox" name=" yellow_crust_ooze"> <span> yellow crust ooze</span></label>
+            <label><input type="checkbox" name=" yellow_urine"> <span> yellow urine</span></label>
+            <label><input type="checkbox" name=" yellowing_of_eyes"> <span> yellowing of eyes</span></label>
+            <label><input type="checkbox" name=" yellowish_skin"> <span> yellowish skin</span></label>
+            <label><input type="checkbox" name="itching"> <span>itching</span></label>
+
+            
+
+          </div>
+        </div>
+        
+        <div class="btn-block">
+          <button type="submit" href="/">SEND</button>
+        </div>
+      </form>
+    </div>
+    <h1 class="bg-success" id="result"></h1>
+  </body>
+</html>
